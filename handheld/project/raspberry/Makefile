@@ -1,4 +1,4 @@
-MODULE := minecraftpi
+MODULE := minecraft-pi
 SOURCES := ../../src/main.cpp \
 ../../src/main_rpi.cpp \
 ../../src/platform/input/Controller.cpp \
@@ -7,6 +7,7 @@ SOURCES := ../../src/main.cpp \
 ../../src/platform/input/Multitouch.cpp \
 ../../src/platform/time.cpp \
 ../../src/platform/CThread.cpp \
+../../src/platform/Mailbox.cpp \
 ../../src/NinecraftApp.cpp \
 ../../src/Performance.cpp \
 ../../src/SharedConstants.cpp \
@@ -254,56 +255,30 @@ SHELL:=/bin/bash
 #
 # Setup default vars and paths
 #
-CFLAGS:=-mfloat-abi=hard -march=armv6j -mfpu=vfp -DRPI -DPOSIX -DGFX_SMALLER_CHUNKS -I/opt/vc/include/ -I/opt/vc/include/interface/vcos/pthreads
+CFLAGS:=-mfloat-abi=hard -march=armv6j -mfpu=vfp -DRPI -DPOSIX -DGFX_SMALLER_CHUNKS -I/opt/vc/include/ -I/opt/vc/include/interface/vcos/pthreads -I/opt/vc/include/interface/vmcs_host/linux
 
 OBJECTS:=$(SOURCES:%.cpp=%.o)
-DEPS:=$(SOURCES:%.cpp=%.d)
-
-OBJDIR=.
-SRCDIR=.
 
 #
 # Build mode specifics
 #
-ifeq ($(BUILD),release)
-	CFLAGS+=-Os -g -DNDEBUG -DPUBLISH
-	OBJDIR=obj/release/d1/d2
-	OBJECTS:=$(patsubst %,$(OBJDIR)/%,$(OBJECTS))
-else
-	CFLAGS+=-O0 -g
-	OBJDIR=obj/debug/d1/d2
-	OBJECTS:=$(patsubst %,$(OBJDIR)/%,$(OBJECTS))
-endif
+CFLAGS+=-Os -g -DNDEBUG -DPUBLISH
 
 #
+# Link options
 #
-#
-LDFLAGS:=-L/opt/vc/lib/ -lGLESv1_CM -lEGL -lbcm_host -lpng -lSDL -L. libRakNet_static_O1.a
-
+LDFLAGS:=-L/opt/vc/lib/ -lGLESv1_CM -lEGL -lbcm_host -lpng -lSDL ../lib_projects/raknet/jni/RaknetSources/libRaknet.a -Wl,--build-id=0xec7c5a7f459230e837d8551aab60b290e9599e63
 
 #
 # Targets
 #
 all: $(MODULE)
 
--include $(DEPS)
-
-release:
-	make "BUILD=release"
-
-#$(CC) -MM $(CFLAGS) $*.cpp > $*.d
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	@mkdir -p $(@D)
+%.o: %.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
-	$(CC) -MM -MT $*.o $(CFLAGS) $*.cpp > $*.d
-	@cp -f $*.d $*.d.tmp
-	@rm -f $*.d.tmp
-
-#@sed -e 's/.*://' -e 's/\$$//' < $*.d.tmp | fmt -1 | sed -e 's/^ *//' -e 's/$$/:/' >> $*.d
 
 $(MODULE): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
 clean:
-	rm -f $(OBJECTS) $(DEPS) $(MODULE)
+	rm -f $(OBJECTS) $(MODULE)

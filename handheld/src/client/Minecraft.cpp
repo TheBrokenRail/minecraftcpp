@@ -1126,7 +1126,7 @@ bool Minecraft::useTouchscreen() {
 #ifdef RPI
 	return false;
 #endif
-	return options.useTouchScreen || !_supportsNonTouchscreen;
+	return options.useTouchScreen | _supportsNonTouchscreen;
 }
 bool Minecraft::supportNonTouchScreen() {
 	return _supportsNonTouchscreen;

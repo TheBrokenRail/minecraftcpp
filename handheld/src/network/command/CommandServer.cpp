@@ -213,6 +213,17 @@ std::string CommandServer::parse(ConnectedClient& client, const std::string& s) 
 		return ToStringOk(mc->level->getTile(x, y, z));
 	}
 
+	if (cmd == "world.getBlockWithData") {
+		int x, y, z;
+		if (3 != sscanf(rest.c_str(), "%d,%d,%d", &x, &y, &z)) {
+			return Fail;
+		}
+		apiPosTranslate.from(x, y, z);
+		int id = mc->level->getTile(x, y, z);
+		int data = mc->level->getData(x, y, z);
+		return ToStringOk(id, data);
+	}
+
 	if (cmd == "world.setBlocks") {
 		int x0, y0, z0, x1, y1, z1, id, data;
 		bool hasData = true;

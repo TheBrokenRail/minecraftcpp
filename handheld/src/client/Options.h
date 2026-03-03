@@ -89,18 +89,9 @@ public:
     };
 
 private:
-	static const float SOUND_MIN_VALUE;
-	static const float SOUND_MAX_VALUE;
-	static const float MUSIC_MIN_VALUE;
-	static const float MUSIC_MAX_VALUE;
-	static const float SENSITIVITY_MIN_VALUE;
-	static const float SENSITIVITY_MAX_VALUE;
-	static const float PIXELS_PER_MILLIMETER_MIN_VALUE;
-	static const float PIXELS_PER_MILLIMETER_MAX_VALUE;
     static const char* RENDER_DISTANCE_NAMES[];
     static const char* DIFFICULTY_NAMES[];
     static const char* GUI_SCALE[];
-	static const int DIFFICULY_LEVELS[];
 public:
 	static bool debugGl;
 
@@ -287,22 +278,6 @@ public:
 			return destroyVibration;
 		return false;
 	}
-
-	float getProgrssMin(const Option* item) {
-		if (item == &Option::MUSIC) return MUSIC_MIN_VALUE;
-		if (item == &Option::SOUND) return SOUND_MIN_VALUE;
-		if (item == &Option::SENSITIVITY) return SENSITIVITY_MIN_VALUE;
-		if (item == &Option::PIXELS_PER_MILLIMETER) return PIXELS_PER_MILLIMETER_MIN_VALUE;
-		return 0;
-	}
-
-	float getProgrssMax(const Option* item) {
-		if (item == &Option::MUSIC) return MUSIC_MAX_VALUE;
-		if (item == &Option::SOUND) return SOUND_MAX_VALUE;
-		if (item == &Option::SENSITIVITY) return SENSITIVITY_MAX_VALUE;
-		if (item == &Option::PIXELS_PER_MILLIMETER) return PIXELS_PER_MILLIMETER_MAX_VALUE;
-		return 1.0f;
-	} 
 
 	std::string getMessage(const Option* item);
 

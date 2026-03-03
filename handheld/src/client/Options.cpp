@@ -145,20 +145,6 @@ const Options::Option
 	Options::Option::DESTROY_VIBRATION   (18, "options.destroyvibration", false, true),
 	Options::Option::PIXELS_PER_MILLIMETER(19, "options.pixelspermilimeter", true, false);
 
-/* private */
-const float Options::SOUND_MIN_VALUE = 0.0f;
-const float Options::SOUND_MAX_VALUE = 1.0f;
-const float Options::MUSIC_MIN_VALUE = 0.0f;
-const float Options::MUSIC_MAX_VALUE = 1.0f;
-const float Options::SENSITIVITY_MIN_VALUE = 0.0f;
-const float Options::SENSITIVITY_MAX_VALUE = 1.0f;
-const float Options::PIXELS_PER_MILLIMETER_MIN_VALUE = 3.0f;
-const float Options::PIXELS_PER_MILLIMETER_MAX_VALUE = 4.0f;
-const int DIFFICULY_LEVELS[] = {
-	Difficulty::PEACEFUL,
-	Difficulty::NORMAL
-};
-
 /*private*/
 const char* Options::RENDER_DISTANCE_NAMES[] = {
 	"options.renderDistance.far",

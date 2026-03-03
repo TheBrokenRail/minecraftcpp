@@ -1,5 +1,98 @@
 MODULE := raknet
-SOURCES := $(wildcard *.cpp)
+SOURCES := BitStream.cpp \
+CCRakNetSlidingWindow.cpp \
+CCRakNetUDT.cpp \
+CheckSum.cpp \
+CloudClient.cpp \
+CloudCommon.cpp \
+CloudServer.cpp \
+CommandParserInterface.cpp \
+ConnectionGraph2.cpp \
+ConsoleServer.cpp \
+DataCompressor.cpp \
+DirectoryDeltaTransfer.cpp \
+DS_BytePool.cpp \
+DS_ByteQueue.cpp \
+DS_HuffmanEncodingTree.cpp \
+DS_Table.cpp \
+DynDNS.cpp \
+EmailSender.cpp \
+EncodeClassName.cpp \
+EpochTimeToString.cpp \
+FileList.cpp \
+FileListTransfer.cpp \
+FileOperations.cpp \
+_FindFirst.cpp \
+FormatString.cpp \
+FullyConnectedMesh2.cpp \
+Getche.cpp \
+Gets.cpp \
+GetTime.cpp \
+gettimeofday.cpp \
+GridSectorizer.cpp \
+HTTPConnection.cpp \
+IncrementalReadInterface.cpp \
+Itoa.cpp \
+LinuxStrings.cpp \
+LocklessTypes.cpp \
+LogCommandParser.cpp \
+MessageFilter.cpp \
+NatPunchthroughClient.cpp \
+NatPunchthroughServer.cpp \
+NatTypeDetectionClient.cpp \
+NatTypeDetectionCommon.cpp \
+NatTypeDetectionServer.cpp \
+NetworkIDManager.cpp \
+NetworkIDObject.cpp \
+PacketConsoleLogger.cpp \
+PacketFileLogger.cpp \
+PacketizedTCP.cpp \
+PacketLogger.cpp \
+PacketOutputWindowLogger.cpp \
+PluginInterface2.cpp \
+Rackspace.cpp \
+RakMemoryOverride.cpp \
+RakNetCommandParser.cpp \
+RakNetSocket.cpp \
+RakNetStatistics.cpp \
+RakNetTransport2.cpp \
+RakNetTypes.cpp \
+RakPeer.cpp \
+RakSleep.cpp \
+RakString.cpp \
+RakThread.cpp \
+RakWString.cpp \
+Rand.cpp \
+rdlmalloc.cpp \
+ReadyEvent.cpp \
+ReliabilityLayer.cpp \
+ReplicaManager3.cpp \
+Router2.cpp \
+RPC4Plugin.cpp \
+SecureHandshake.cpp \
+SendToThread.cpp \
+SHA1.cpp \
+SignaledEvent.cpp \
+SimpleMutex.cpp \
+SocketLayer.cpp \
+StringCompressor.cpp \
+StringTable.cpp \
+SuperFastHash.cpp \
+TableSerializer.cpp \
+TCPInterface.cpp \
+TeamBalancer.cpp \
+TelnetTransport.cpp \
+ThreadsafePacketLogger.cpp \
+TwoWayAuthentication.cpp \
+UDPForwarder.cpp \
+UDPProxyClient.cpp \
+UDPProxyCoordinator.cpp \
+UDPProxyServer.cpp \
+VariableDeltaSerializer.cpp \
+VariableListDeltaTracker.cpp \
+VariadicSQLParser.cpp \
+VitaIncludes.cpp \
+WSAStartupSingleton.cpp
 
 CFLAGS:=-I/opt/vc/include/ -I/opt/vc/include/interface/vcos/pthreads $(CFLAGS)
 CFLAGS+=-DNDEBUG -s -O1
@@ -14,9 +107,6 @@ all: $(MODULE)
 	$(CC) -fpic -g -c $(CFLAGS) $< -o $@
 
 $(MODULE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -shared -o libRakNet.so
-
-static: $(OBJECTS)
 	ar rvs libRaknet.a $(OBJECTS)
 
 clean:

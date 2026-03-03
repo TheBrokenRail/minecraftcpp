@@ -29,6 +29,7 @@ void KeyboardInput::releaseAllKeys()
 {
 	xa = 0;
 	ya = 0;
+	jumping = false;
 
 	for (int i = 0; i < NumKeys; i++) {
 		keys[i] = false;

@@ -150,11 +150,3 @@ void OptionButton::updateImage(Options* options) {
 		_secondImage = options->getBooleanValue(_option);
 	}
 }
-
-void OptionButton::mouseClicked( Minecraft* minecraft, int x, int y, int buttonNum ) {
-	if(buttonNum == MouseAction::ACTION_LEFT) {
-		if(clicked(minecraft, x, y)) {
-			toggle(&minecraft->options);
-		}
-	}
-}

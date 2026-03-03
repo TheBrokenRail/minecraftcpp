@@ -16,10 +16,13 @@ class OptionsItem: public GuiElementContainer
 	typedef GuiElementContainer super;
 public:
 	OptionsItem(std::string label, GuiElement* element);
+	~OptionsItem();
 	virtual void render(Minecraft* minecraft, int xm, int ym);
 	void setupPositions();
+	virtual void tick(Minecraft *minecraft);
 
 private:
+	GuiElement *element;
 	std::string label;
 };
 
