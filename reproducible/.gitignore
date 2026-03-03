@@ -1,0 +1,6 @@
+/mnt
+/*.qcow2
+/files/*
+!/files/download.sh
+/out
+/*.img
